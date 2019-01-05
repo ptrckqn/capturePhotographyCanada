@@ -1,0 +1,17 @@
+<% include partials/header %>
+
+
+<h2>Contact Me</h2>
+<hr>
+<h4>Please fill out the form below and I'll message you back as soon as I can</h4>
+<p class="landing">
+  <form class="contactForm" action="/contact" method="post">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="email" placeholder="Email" required>
+    <textarea name="message" placeholder="Message" rows="3" required></textarea>
+    <div >
+      <button type="submit" class="sendButton"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </form>
+</p>
+<% include partials/footer %>

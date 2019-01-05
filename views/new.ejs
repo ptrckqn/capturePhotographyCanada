@@ -1,0 +1,18 @@
+<% include partials/header %>
+
+<form enctype="multipart/form-data" action="/portfolio" method="POST">
+  <label for="">Upload an image (.jpg only): </label>
+  <input type="file" name="uploadedImage" accept="image/jpeg" required>
+  <br>
+  <label for="">Choose a tag: </label>
+  <select name="tag" required>
+    <option value="" selected disabled hidden>Choose a tag</option>
+    <option value="wedding">Wedding</option>
+    <option value="family">Family</option>
+    <option value="newborn">Newborn</option>
+    <option value="scenery">Scenery</option>
+  </select>
+  <br>
+  <button>Upload</button>
+</form>
+<% include partials/footer %>
