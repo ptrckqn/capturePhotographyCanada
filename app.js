@@ -145,18 +145,21 @@ app.post("/portfolio", isLoggedIn, upload.single("uploadedImage"), function(req,
 });
 
 //Destroy images
-app.delete("/portfolio", function(req, res){
-  var query = url.parse(req.url, true);
-  var imageURL = "\"" + req.query.id + "\"";
-  Image.find({path: imageURL}, function(err, image){
-    if(err){
-      console.log(err);
-    }
-    else{
-      console.log(image);
-    }
-  });
-});
+// app.delete("/portfolio", function(req, res){
+//   var query = url.parse(req.url, true);
+//   var imageURL = "\"" + req.query.id + "\"";
+//   Image.find({path: imageURL}, function(err, image){
+//     if(err){
+//       console.log(err);
+//     }
+//     else{
+//       console.log(image);
+//     }
+//   });
+// });
+//        <form class="" action="/portfolio/?_method=DELETE&id=<%=imageArray[i]%>" method="POST">
+      //    <input type="submit" class="deleteButton" value="Delete">
+    //    </form>
 
 //Register route used once to create admin account
 // app.get("/register", function(req, res){
