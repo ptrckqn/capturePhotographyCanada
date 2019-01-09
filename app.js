@@ -3,6 +3,7 @@ app            = express(),
 mongoose       = require("mongoose"),
 methodOverride = require("method-override"),
 url            = require("url"),
+keys           = require("./config/keys"),
 //Uploading to DB
 bodyParser     = require("body-parser"),
 Image          = require("./models/image"),
@@ -29,7 +30,7 @@ nodemailer     = require("nodemailer");
 
 //Connecting to the MongoDB database
 // mongoose.connect("mongodb://localhost:27017/capture_photography_canada", {useNewUrlParser: true});
-mongoose.connect("mongodb://admin:capturepass88@ds115124.mlab.com:15124/capturephotographycanada", {useNewUrlParser: true});
+mongoose.connect(keys.mLabID, {useNewUrlParser: true});
 
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true})); //Using bodyparser
@@ -38,7 +39,7 @@ app.use(express.static(__dirname + "/public")); //Public folder being used to st
 
 //Passport Configuration
 app.use(require("express-session")({
-  secret: "Theo and Amelia are the best!",
+  secret: keys.passportSecret,
   resave: false,
   saveUninitialized: false
 }));
@@ -49,9 +50,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 cloudinary.config({
-  cloud_name: "dzpvgtcdp",
-  api_key: "694265316154491",
-  api_secret: "EQfA1I-MAYQmfl2WzJHeAijgxo4"
+  cloud_name: keys.cloudinaryName,
+  api_key: keys.cloudinaryKey,
+  api_secret: keys.cloudinarySecret
 });
 
 //Landing
@@ -202,8 +203,8 @@ app.post("/contact", function(req, res){
     port: 465,
     secure: true,
     auth: {
-      user: "mySMTP.17@gmail.com",
-      pass: "kuqVuz-tempab-4hurhy"
+      user: keys.nodemailerUser,
+      pass: keys.nodemailerPass
     }
   });
 
@@ -235,10 +236,6 @@ function isLoggedIn(req, res, next){
   res.redirect("/login");
 }
 
-//Local testing port
-// app.list(3000, function(){
-//   console.log("App is running on port 3000");
-// });
 
 //Deployed on Heroku port
 const PORT = process.env.PORT || 3000;
