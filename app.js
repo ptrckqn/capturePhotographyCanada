@@ -49,10 +49,17 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//Media server info
 cloudinary.config({
   cloud_name: keys.cloudinaryName,
   api_key: keys.cloudinaryKey,
   api_secret: keys.cloudinarySecret
+});
+
+//Verify user is logged in
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
 });
 
 //Landing
@@ -146,21 +153,18 @@ app.post("/portfolio", isLoggedIn, upload.single("uploadedImage"), function(req,
 });
 
 //Destroy images
-// app.delete("/portfolio", function(req, res){
-//   var query = url.parse(req.url, true);
-//   var imageURL = "\"" + req.query.id + "\"";
-//   Image.find({path: imageURL}, function(err, image){
-//     if(err){
-//       console.log(err);
-//     }
-//     else{
-//       console.log(image);
-//     }
-//   });
-// });
-//        <form class="" action="/portfolio/?_method=DELETE&id=<%=imageArray[i]%>" method="POST">
-      //    <input type="submit" class="deleteButton" value="Delete">
-    //    </form>
+app.delete("/portfolio", function(req, res){
+  var query = url.parse(req.url, true);
+  Image.findOneAndDelete({public_id: req.query.id}, function(err, image){
+    if(err){
+      console.log(err);
+    }
+    else{
+      cloudinary.v2.uploader.destroy(req.query.id);
+      res.redirect("/portfolio");
+    }
+  });
+});
 
 //Register route used once to create admin account
 // app.get("/register", function(req, res){
