@@ -2,7 +2,7 @@
 $('.headerMenu').on('click', function(){
   $('.headingLogo').toggleClass('hide');
   $('nav').toggleClass('hide');
-  if($(window).width() >= 814){
+  if($(window).width() >= 1024){
     if($('.navMenu').css('left') == '-200px'){
       $('.navMenu').css('left', '110px');
     }
