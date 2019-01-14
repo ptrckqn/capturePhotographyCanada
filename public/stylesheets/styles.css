@@ -64,6 +64,7 @@
     left: 0;
   }
 
+
   .navLinks{
     font-size: 1em;
   }
@@ -146,6 +147,10 @@
     /* padding: 0 60px; */
   }
 
+  .navFooter{
+    padding-top: 15%;
+  }
+
   .socialMediaLinks{
     font-size: 2em;
     margin-top: calc(15vh);
@@ -157,7 +162,7 @@
   }
 
   .socialMediaLinks ul{
-    margin-left: 30px;
+    margin-left: 60px;
   }
 }
 
@@ -316,7 +321,6 @@ nav{
 }
 
 .navFooter{
-  padding-top: 15%;
   color: #d8d8d8;
   text-align: center;
   font-size: 0.75em;
